@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reflex-arcade-v1';
+const CACHE_NAME = 'reflex-arcade-v2'; // bump this any time you want to force-refresh the app shell
 const APP_SHELL = [
   './index.html',
   './manifest.json',
@@ -23,9 +23,24 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const req = event.request;
+
+  // Network-first for the HTML page itself, so new deploys always show up
+  // instead of getting stuck on whatever was cached at install time.
+  if (req.mode === 'navigate' || req.destination === 'document') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // Cache-first for everything else (icons, manifest, etc.)
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return cached || fetch(event.request).catch(() => cached);
-    })
+    caches.match(req).then((cached) => cached || fetch(req).catch(() => cached))
   );
 });
