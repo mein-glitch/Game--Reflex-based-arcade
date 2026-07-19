@@ -1048,7 +1048,16 @@ h1,h2,.display{font-family:'Unbounded',sans-serif;}
   </div>
 
   <div class="hub-hero">
-    <h1 class="hub-title"><span class="l1">REFLEX</span><span class="l2">ARCADE</span></h1>
+    <div class="title-badge">
+      <svg class="badge-frame" viewBox="0 0 300 112" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M30,8 L270,8 L270,20 L286,20 L286,38 L270,38 L270,72 L286,72 L286,90 L270,90 L270,102 L30,102 L30,90 L14,90 L14,72 L30,72 L30,38 L14,38 L14,20 L30,20 Z"/>
+        <line x1="2" y1="24" x2="10" y2="24"/><line x1="2" y1="34" x2="8" y2="34"/>
+        <line x1="290" y1="24" x2="298" y2="24"/><line x1="292" y1="34" x2="298" y2="34"/>
+        <line x1="2" y1="78" x2="10" y2="78"/><line x1="2" y1="88" x2="8" y2="88"/>
+        <line x1="290" y1="78" x2="298" y2="78"/><line x1="292" y1="88" x2="298" y2="88"/>
+      </svg>
+      <h1 class="hub-title"><span class="l1">REFLEX</span><span class="l2">ARCADE</span></h1>
+    </div>
     <div class="joystick-wrap" aria-hidden="true">
       <svg viewBox="0 0 60 74" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -1081,18 +1090,13 @@ h1,h2,.display{font-family:'Unbounded',sans-serif;}
     <div class="cabinet-screen">
       <div class="screen-glass">
         <div class="screen-glow"></div>
+        <div class="screen-stars" id="screenStars"></div>
         <div class="screen-content">
           <div class="hub-footer">
-            <div class="hub-foot-card">
-              <div class="hub-foot-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2c1.3 4-3.8 5.2-3.8 9.2a3.8 3.8 0 0 0 7.6 0c0-1.4-.9-2-.9-3.4 1.4 1 2.9 3 2.9 5.4a6 6 0 0 1-12 0C5.8 8.2 9 6 12 2Z" fill="#ff2e6c"/>
-                </svg>
-              </div>
-              <div>
-                <div class="hub-foot-label">Best Streak</div>
-                <div class="hub-foot-value" id="bestStreakVal">0</div>
-              </div>
+            <div class="hub-foot-label">Best Streak</div>
+            <div class="hub-foot-value-row">
+              <span class="hub-foot-icon">&#x1F3C6;</span>
+              <span class="hub-foot-value" id="bestStreakVal">0</span>
             </div>
           </div>
           <div class="tile-grid" id="tileGrid"></div>
@@ -1104,21 +1108,142 @@ h1,h2,.display{font-family:'Unbounded',sans-serif;}
     </div>
     <div class="cabinet-panel">
       <div class="panel-joystick">
-        <svg viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7,38 L20,31 L33,38 L20,45 Z" fill="none" stroke="#4a5568" stroke-width="2"/>
-          <line x1="20" y1="31" x2="20" y2="12" stroke="#4a5568" stroke-width="3.4" stroke-linecap="round"/>
-          <circle cx="20" cy="8" r="6.5" fill="#3a4358" stroke="#4a5568" stroke-width="1"/>
+        <svg viewBox="0 0 40 58" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="20" cy="50" rx="14" ry="5" fill="#0a0c12"/>
+          <path d="M7,42 L20,35 L33,42 L20,49 Z" fill="none" stroke="#4a5568" stroke-width="2"/>
+          <line x1="20" y1="35" x2="20" y2="16" stroke="#2a2f3a" stroke-width="3.6" stroke-linecap="round"/>
+          <circle cx="20" cy="10" r="8.5" fill="url(#joyBallGrad)" stroke="#a0180e" stroke-width="1"/>
+          <circle cx="17" cy="7" r="2.4" fill="rgba(255,255,255,.6)"/>
+          <defs>
+            <radialGradient id="joyBallGrad" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffb3a0"/>
+              <stop offset="55%" stop-color="#ff3a2a"/>
+              <stop offset="100%" stop-color="#a0180e"/>
+            </radialGradient>
+          </defs>
         </svg>
       </div>
+      <div class="panel-mid">
+        <div class="panel-player-label">— Player 1 —</div>
+        <div class="panel-red-btns">
+          <span class="panel-rect-btn"></span>
+          <span class="panel-rect-btn"></span>
+        </div>
+      </div>
       <div class="panel-buttons">
-        <span class="panel-btn red"></span>
-        <span class="panel-btn yellow"></span>
-        <span class="panel-btn teal"></span>
+        <span class="panel-btn blue"></span>
+        <span class="panel-btn blue"></span>
+        <span class="panel-btn purple"></span>
+        <span class="panel-btn purple"></span>
       </div>
     </div>
     <div class="cabinet-base"></div>
   </div>
 </div>
+<div id="hub">
+  <div class="hub-topbar">
+    <div class="hub-icon-btn" id="btnMenu" tabindex="0" role="button" aria-label="Menu" onclick="toast('5 games. Pick one and go.')" onkeydown="if(event.key==='Enter')toast('5 games. Pick one and go.')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+    </div>
+    <div class="hub-icon-btn" id="btnStats" tabindex="0" role="button" aria-label="Stats" onclick="showStats()" onkeydown="if(event.key==='Enter')showStats()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg>
+    </div>
+  </div>
+
+  <div class="hub-hero">
+    <div class="title-badge">
+      <svg class="badge-frame" viewBox="0 0 300 112" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M30,8 L270,8 L270,20 L286,20 L286,38 L270,38 L270,72 L286,72 L286,90 L270,90 L270,102 L30,102 L30,90 L14,90 L14,72 L30,72 L30,38 L14,38 L14,20 L30,20 Z"/>
+        <line x1="2" y1="24" x2="10" y2="24"/><line x1="2" y1="34" x2="8" y2="34"/>
+        <line x1="290" y1="24" x2="298" y2="24"/><line x1="292" y1="34" x2="298" y2="34"/>
+        <line x1="2" y1="78" x2="10" y2="78"/><line x1="2" y1="88" x2="8" y2="88"/>
+        <line x1="290" y1="78" x2="298" y2="78"/><line x1="292" y1="88" x2="298" y2="88"/>
+      </svg>
+      <h1 class="hub-title"><span class="l1">REFLEX</span><span class="l2">ARCADE</span></h1>
+    </div>
+    <div class="joystick-wrap" aria-hidden="true">
+      <svg viewBox="0 0 60 74" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="joyLine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" style="stop-color:var(--neon-hi)"/>
+            <stop offset="100%" style="stop-color:var(--neon-lo)"/>
+          </linearGradient>
+        </defs>
+        <path d="M10,54 L30,44 L50,54 L30,64 Z" fill="none" stroke="url(#joyLine)" stroke-width="2.6" stroke-linejoin="round"/>
+        <path d="M10,54 L10,60 L30,70 L30,64" fill="none" stroke="url(#joyLine)" stroke-width="2.6" stroke-linejoin="round"/>
+        <path d="M50,54 L50,60 L30,70" fill="none" stroke="url(#joyLine)" stroke-width="2.6" stroke-linejoin="round"/>
+        <line x1="30" y1="44" x2="30" y2="16" stroke="url(#joyLine)" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="30" cy="10" r="9.5" fill="url(#joyLine)" stroke="url(#joyLine)" stroke-width="1.4"/>
+        <path d="M25,6 a5,5 0 0 1 7,-1.5" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <button class="light-switch" id="lightSwitch" type="button" aria-label="Switch neon color theme" aria-pressed="false">
+      <span class="switch-screw"></span>
+      <span class="switch-plate"><span class="switch-toggle"></span></span>
+      <span class="switch-screw"></span>
+    </button>
+  </div>
+
+  <div class="cabinet">
+    <div class="cabinet-hood">
+      <div class="cabinet-speaker l"></div>
+      <div class="cabinet-hood-label">Arcade</div>
+      <div class="cabinet-speaker r"></div>
+    </div>
+    <div class="cabinet-screen">
+      <div class="screen-glass">
+        <div class="screen-glow"></div>
+        <div class="screen-stars" id="screenStars"></div>
+        <div class="screen-content">
+          <div class="hub-footer">
+            <div class="hub-foot-label">Best Streak</div>
+            <div class="hub-foot-value-row">
+              <span class="hub-foot-icon">&#x1F3C6;</span>
+              <span class="hub-foot-value" id="bestStreakVal">0</span>
+            </div>
+          </div>
+          <div class="tile-grid" id="tileGrid"></div>
+        </div>
+        <div class="screen-scanlines"></div>
+        <div class="screen-vignette"></div>
+        <div class="screen-sheen"></div>
+      </div>
+    </div>
+    <div class="cabinet-panel">
+      <div class="panel-joystick">
+        <svg viewBox="0 0 40 58" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="20" cy="50" rx="14" ry="5" fill="#0a0c12"/>
+          <path d="M7,42 L20,35 L33,42 L20,49 Z" fill="none" stroke="#4a5568" stroke-width="2"/>
+          <line x1="20" y1="35" x2="20" y2="16" stroke="#2a2f3a" stroke-width="3.6" stroke-linecap="round"/>
+          <circle cx="20" cy="10" r="8.5" fill="url(#joyBallGrad)" stroke="#a0180e" stroke-width="1"/>
+          <circle cx="17" cy="7" r="2.4" fill="rgba(255,255,255,.6)"/>
+          <defs>
+            <radialGradient id="joyBallGrad" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffb3a0"/>
+              <stop offset="55%" stop-color="#ff3a2a"/>
+              <stop offset="100%" stop-color="#a0180e"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="panel-mid">
+        <div class="panel-player-label">— Player 1 —</div>
+        <div class="panel-red-btns">
+          <span class="panel-rect-btn"></span>
+          <span class="panel-rect-btn"></span>
+        </div>
+      </div>
+      <div class="panel-buttons">
+        <span class="panel-btn blue"></span>
+        <span class="panel-btn blue"></span>
+        <span class="panel-btn purple"></span>
+        <span class="panel-btn purple"></span>
+      </div>
+    </div>
+    <div class="cabinet-base"></div>
+  </div>
+</div>
+
 
 <!-- ══ DIFFICULTY SHEET ══ -->
 <div id="diff-sheet">
@@ -1479,77 +1604,62 @@ document.addEventListener('click', function unlockOnFirstClick(){
 // ══════════════════════════
 const GAMES = [
   {id:'gatedrop', name:'Gate Drop', desc:'Falling bars, one gap each. Slide into it before it hits.', ready:true,
-   c1:'#ff8a3c', c2:'#ff5d3c', diffWord:'Fast', diffLevel:1,
-   icon:`<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <defs>
-       <linearGradient id="gdBar-gatedrop" x1="0" y1="0" x2="0" y2="1">
-         <stop offset="0%" stop-color="#ff8a3c" stop-opacity=".2"/>
-         <stop offset="100%" stop-color="#ff5d3c"/>
-       </linearGradient>
-       <radialGradient id="gdFlame-gatedrop" cx="50%" cy="70%" r="60%">
-         <stop offset="0%" stop-color="#ffd23c"/>
-         <stop offset="55%" stop-color="#ff5d3c" stop-opacity=".55"/>
-         <stop offset="100%" stop-color="#ff5d3c" stop-opacity="0"/>
-       </radialGradient>
-     </defs>
-     <circle cx="32" cy="44" r="20" fill="url(#gdFlame-gatedrop)"/>
-     <rect x="10" y="7" width="8" height="45" rx="3" fill="url(#gdBar-gatedrop)"/>
-     <rect x="46" y="7" width="8" height="45" rx="3" fill="url(#gdBar-gatedrop)"/>
-     <rect x="7" y="50" width="50" height="4" rx="2" fill="#3a2418"/>
+   c1:'#c060ff', c2:'#9a3aff', diffWord:'Fast', diffLevel:1,
+   icon:`<svg viewBox="0 0 32 32" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+     <rect x="6" y="4" width="4" height="20" fill="#c060ff"/>
+     <rect x="22" y="4" width="4" height="20" fill="#c060ff"/>
+     <rect x="4" y="22" width="24" height="4" fill="#8a3aff"/>
+     <rect x="14" y="6" width="4" height="4" fill="#ff5233"/>
+     <rect x="12" y="10" width="8" height="4" fill="#ff5233"/>
+     <rect x="14" y="14" width="4" height="4" fill="#ff5233"/>
+     <rect x="14" y="18" width="4" height="2" fill="#ffb199"/>
    </svg>`},
   {id:'mirror', name:'Mirror Hands', desc:'Tap the flashed side — unless the round says otherwise.', ready:true,
-   c1:'#3c8aff', c2:'#8a5cff', diffWord:'Crazy', diffLevel:1,
-   icon:`<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <rect x="0" y="0" width="32" height="64" fill="#0c1c38"/>
-     <rect x="32" y="0" width="32" height="64" fill="#380d16"/>
-     <path d="M23 32 L14 32 M14 32 L20 26 M14 32 L20 38" stroke="#3c8aff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-     <path d="M41 32 L50 32 M50 32 L44 26 M50 32 L44 38" stroke="#ff3c50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+   c1:'#3ca0ff', c2:'#2b6bff', diffWord:'Crazy', diffLevel:1,
+   icon:`<svg viewBox="0 0 32 32" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+     <rect x="4" y="6" width="3" height="5" fill="#3ca0ff"/>
+     <rect x="8" y="4" width="3" height="7" fill="#3ca0ff"/>
+     <rect x="12" y="6" width="3" height="5" fill="#3ca0ff"/>
+     <rect x="4" y="11" width="11" height="9" fill="#3ca0ff"/>
+     <rect x="7" y="20" width="5" height="5" fill="#3ca0ff"/>
+     <rect x="17" y="6" width="3" height="5" fill="#3ca0ff"/>
+     <rect x="21" y="4" width="3" height="7" fill="#3ca0ff"/>
+     <rect x="25" y="6" width="3" height="5" fill="#3ca0ff"/>
+     <rect x="17" y="11" width="11" height="9" fill="#3ca0ff"/>
+     <rect x="20" y="20" width="5" height="5" fill="#3ca0ff"/>
    </svg>`},
   {id:'catchdrop', name:'Catch or Drop', desc:'Grab the good ones. Dodge the bad ones. Don\u2019t mix them up.', ready:true,
-   c1:'#b054ff', c2:'#7c3aed', diffWord:'Tricky', diffLevel:1,
-   icon:`<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <ellipse cx="13" cy="17" rx="8" ry="10" fill="#2b6bff"/>
-     <path d="M13 27 L10.5 31 L15.5 31 Z" fill="#2b6bff"/>
-     <circle cx="32" cy="18" r="13" fill="#fff" opacity=".22"/>
-     <circle cx="32" cy="18" r="9" fill="#fff" opacity=".97"/>
-     <circle cx="51" cy="17" r="9" fill="#ff3050"/>
-     <circle cx="48" cy="15" r="1.6" fill="#210007"/>
-     <circle cx="54" cy="15" r="1.6" fill="#210007"/>
-     <path d="M47 21 Q51 24.5 55 21" stroke="#210007" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-     <path d="M11 48 Q32 61 53 48" stroke="#b054ff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+   c1:'#ffcf3c', c2:'#e0a800', diffWord:'Tricky', diffLevel:1,
+   icon:`<svg viewBox="0 0 32 32" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+     <rect x="11" y="4" width="8" height="8" fill="#ffcf3c"/>
+     <rect x="13" y="6" width="4" height="4" fill="#fff3c4"/>
+     <rect x="8" y="18" width="4" height="4" fill="#ffcf3c"/>
+     <rect x="12" y="20" width="4" height="4" fill="#ffcf3c"/>
+     <rect x="16" y="20" width="4" height="4" fill="#ffcf3c"/>
+     <rect x="20" y="18" width="4" height="4" fill="#ffcf3c"/>
+     <rect x="10" y="16" width="12" height="4" fill="#ffcf3c"/>
+     <rect x="12" y="14" width="8" height="2" fill="#ffcf3c"/>
    </svg>`},
   {id:'spotlight', name:'Spotlight Dodge', desc:'Stay out of the light as it sweeps the dark.', ready:true,
-   c1:'#ffcf3c', c2:'#c98a1f', diffWord:'Hard', diffLevel:1,
-   icon:`<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <defs>
-       <linearGradient id="slCone-spotlight" x1="0" y1="0" x2="1" y2="1">
-         <stop offset="0%" stop-color="#ffe8b4" stop-opacity=".9"/>
-         <stop offset="100%" stop-color="#ffcf3c" stop-opacity="0"/>
-       </linearGradient>
-     </defs>
-     <rect width="64" height="64" fill="#0a0812"/>
-     <path d="M2 2 L42 2 L20 46 Z" fill="url(#slCone-spotlight)"/>
-     <g transform="translate(13,29)">
-       <circle cx="7" cy="4" r="4" fill="#15101f"/>
-       <path d="M7 8 L7 20 M7 12 L1 16 M7 12 L15 10 M7 20 L1 30 M7 20 L14 27" stroke="#15101f" stroke-width="3.2" stroke-linecap="round"/>
-     </g>
+   c1:'#3ee66a', c2:'#1fb84a', diffWord:'Hard', diffLevel:1,
+   icon:`<svg viewBox="0 0 32 32" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+     <rect x="4" y="22" width="6" height="6" fill="#1a3a24"/>
+     <rect x="8" y="18" width="6" height="6" fill="#1a3a24"/>
+     <rect x="12" y="14" width="6" height="6" fill="#1a3a24"/>
+     <rect x="16" y="10" width="6" height="6" fill="#3ee66a"/>
+     <rect x="20" y="6" width="6" height="6" fill="#3ee66a"/>
+     <rect x="23" y="4" width="4" height="4" fill="#d8ffe4"/>
    </svg>`},
   {id:'beatsilence', name:'Beat or Silence', desc:'Tap every beat. Freeze on silence.', ready:true,
-   c1:'#ff2e6c', c2:'#c2185b', diffWord:'Expert', diffLevel:1,
-   icon:`<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <defs>
-       <linearGradient id="bsBar-beatsilence" x1="0" y1="0" x2="1" y2="0">
-         <stop offset="0%" stop-color="#3c8aff"/>
-         <stop offset="50%" stop-color="#b054ff"/>
-         <stop offset="100%" stop-color="#ff2e6c"/>
-       </linearGradient>
-     </defs>
-     <circle cx="32" cy="32" r="26" stroke="url(#bsBar-beatsilence)" stroke-width="2.5" fill="none" opacity=".6"/>
-     <rect x="12" y="26" width="4" height="12" rx="2" fill="url(#bsBar-beatsilence)"/>
-     <rect x="20" y="18" width="4" height="28" rx="2" fill="url(#bsBar-beatsilence)"/>
-     <rect x="28" y="24" width="4" height="16" rx="2" fill="url(#bsBar-beatsilence)"/>
-     <rect x="36" y="14" width="4" height="36" rx="2" fill="url(#bsBar-beatsilence)"/>
-     <rect x="44" y="22" width="4" height="20" rx="2" fill="url(#bsBar-beatsilence)"/>
+   c1:'#ff5233', c2:'#ff8a3c', diffWord:'Expert', diffLevel:1,
+   icon:`<svg viewBox="0 0 32 32" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+     <rect x="3" y="14" width="3" height="4" fill="#ff5233"/>
+     <rect x="7" y="10" width="3" height="12" fill="#ff5233"/>
+     <rect x="11" y="14" width="3" height="4" fill="#ff5233"/>
+     <rect x="15" y="4" width="3" height="24" fill="#ff8a3c"/>
+     <rect x="19" y="10" width="3" height="12" fill="#ff5233"/>
+     <rect x="23" y="14" width="3" height="4" fill="#ff5233"/>
+     <rect x="27" y="10" width="3" height="12" fill="#ff5233"/>
    </svg>`},
 ];
 
